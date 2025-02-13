@@ -138,6 +138,21 @@ svg {
       background: rgb(0, 0, 0);
       border: 1px solid rgb(1000, 1000, 1000);
     }
+
+    .curso {
+      margin-top: 1px;
+      padding: 7px 15px;
+      background-color: #0070f3;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .curso:hover {
+      background-color: #005bb5;
+    }
   }
 
   .footer {

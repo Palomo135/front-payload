@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { getPayload } from 'payload'
 import React from 'react'
 import { fileURLToPath } from 'url'
+//import Link from 'next/link'
 
 import config from '@/payload.config'
 import './styles.css'
@@ -45,6 +46,9 @@ export default async function HomePage() {
             target="_blank"
           >
             Documentation
+          </a>
+          <a className="curso" href={'/curso'} rel="noopener noreferrer" target="_blank">
+            Ver Cursos
           </a>
         </div>
       </div>
