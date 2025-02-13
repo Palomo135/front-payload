@@ -1,13 +1,9 @@
 import type { CollectionConfig } from 'payload'
 
-export const Modulos: CollectionConfig = {
-    slug: 'modulos',
-    labels: {
-        singular: 'Módulo',
-        plural: 'Módulos'
-    },
-    admin: {
-        useAsTitle: 'titulo'
+export const Modulo: CollectionConfig = {
+    slug: 'modulo',
+    access: {
+        read: () => true,
     },
     fields: [
         {
@@ -23,11 +19,10 @@ export const Modulos: CollectionConfig = {
         {
             name: 'curso',
             type: 'relationship',
-            relationTo: 'curso', // Asegúrate de que 'cursos' es el slug de tu colección de cursos
-            label: 'Curso',
+            relationTo: 'curso',
             required: true
         }
     ],
 
 };
-export default Modulos;
+export default Modulo;

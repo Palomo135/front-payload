@@ -6,6 +6,9 @@ export const Curso: CollectionConfig = {
     access: {
         read: () => true,
     },
+    admin: {
+        useAsTitle: 'nombre', // Esto hará que el select muestre el nombre del curso
+    },
     fields: [
         {
             name: 'nombre',

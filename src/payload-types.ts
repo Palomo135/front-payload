@@ -68,6 +68,7 @@ export interface Config {
     users: User;
     media: Media;
     curso: Curso;
+    modulo: Modulo;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -77,6 +78,7 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     curso: CursoSelect<false> | CursoSelect<true>;
+    modulo: ModuloSelect<false> | ModuloSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -181,23 +183,39 @@ export interface Curso {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "modulo".
+ */
+export interface Modulo {
+  id: number;
+  Nombre: string;
+  Descripcion: string;
+  curso: number | Curso;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
   id: number;
   document?:
-  | ({
-    relationTo: 'users';
-    value: number | User;
-  } | null)
-  | ({
-    relationTo: 'media';
-    value: number | Media;
-  } | null)
-  | ({
-    relationTo: 'curso';
-    value: number | Curso;
-  } | null);
+    | ({
+        relationTo: 'users';
+        value: number | User;
+      } | null)
+    | ({
+        relationTo: 'media';
+        value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'curso';
+        value: number | Curso;
+      } | null)
+    | ({
+        relationTo: 'modulo';
+        value: number | Modulo;
+      } | null);
   globalSlug?: string | null;
   user: {
     relationTo: 'users';
@@ -218,14 +236,14 @@ export interface PayloadPreference {
   };
   key?: string | null;
   value?:
-  | {
-    [k: string]: unknown;
-  }
-  | unknown[]
-  | string
-  | number
-  | boolean
-  | null;
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -290,6 +308,17 @@ export interface CursoSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "modulo_select".
+ */
+export interface ModuloSelect<T extends boolean = true> {
+  Nombre?: T;
+  Descripcion?: T;
+  curso?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents_select".
  */
 export interface PayloadLockedDocumentsSelect<T extends boolean = true> {
@@ -330,5 +359,5 @@ export interface Auth {
 
 
 declare module 'payload' {
-  export interface GeneratedTypes extends Config { }
+  export interface GeneratedTypes extends Config {}
 }
