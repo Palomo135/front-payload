@@ -20,7 +20,6 @@ export default async function HomePage() {
       return 'Sin descripción'
     }
 
-    // Extraer el texto de todos los children
     return descripcion.root.children[0].children.map((child: any) => child.text || '').join('')
   }
 

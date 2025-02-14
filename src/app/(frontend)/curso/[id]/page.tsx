@@ -2,14 +2,30 @@ import { getPayload } from 'payload'
 import { Media } from '@/payload-types'
 import config from '@/payload.config'
 import Image from 'next/image'
+import Link from 'next/link'
+import './styles.css'
 
 async function getCurso(id: string) {
   const payload = await getPayload({ config })
   return await payload.findByID({ collection: 'curso', id })
 }
 
+async function getModulosPorCurso(cursoId: string) {
+  const payload = await getPayload({ config })
+  const { docs: modulos } = await payload.find({
+    collection: 'modulo',
+    where: {
+      curso: {
+        equals: cursoId, // Filtra por el ID del curso
+      },
+    },
+  })
+  return modulos
+}
+
 export default async function CursoPage({ params }: { params: Promise<{ id: string }> }) {
   const curso = await getCurso((await params).id)
+  const modulos = await getModulosPorCurso((await params).id)
 
   if (!curso) {
     return <p>Curso no encontrado</p>
@@ -56,11 +72,37 @@ export default async function CursoPage({ params }: { params: Promise<{ id: stri
   }
 
   return (
-    <div>
-      <h1>{curso.nombre}</h1>
-      <div>
+    <div className="container">
+      <h1 className="title">{curso.nombre}</h1>
+      {curso.logo && (
+        <div className="logo-container">
+          <h3>Logo:</h3>
+          <Image
+            src={(curso.logo as Media).url!}
+            alt={(curso.logo as Media).alt ?? ''}
+            width={200}
+            height={200}
+          />
+        </div>
+      )}
+      <div className="details">
         <strong>Descripción: </strong>
         {getDescriptionText(curso.descripcion)}
+      </div>
+      <div className="modules">
+        <h2>Módulos del curso</h2>
+        {modulos.length > 0 ? (
+          <ul>
+            {modulos.map((modulo) => (
+              <li key={modulo.id}>
+                <h3>{modulo.Nombre}</h3>
+                <p>{modulo.Descripcion}</p>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>Este curso no tiene módulos asignados.</p>
+        )}
       </div>
       <p>
         <strong>Estado:</strong> {curso.estado ? 'Activo' : 'Inactivo'}
@@ -78,25 +120,9 @@ export default async function CursoPage({ params }: { params: Promise<{ id: stri
         <strong>Recurso:</strong> {curso.recurso}
       </p>
 
-      {curso.logo && (
-        <div>
-          <h3>Logo:</h3>
-          <Image
-            src={(curso.logo as Media).url!}
-            alt={(curso.logo as Media).alt ?? ''}
-            width={150}
-            height={150}
-          />
-        </div>
-      )}
-
-      <a href={'/curso'}>
-        <button
-          style={{ marginTop: '20px', padding: '10px', backgroundColor: '#0070f3', color: 'white' }}
-        >
-          Volver a la lista de cursos
-        </button>
-      </a>
+      <Link href="/curso" className="back-button">
+        Volver a la lista de cursos
+      </Link>
     </div>
   )
 }
