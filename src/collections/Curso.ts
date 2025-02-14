@@ -18,18 +18,21 @@ export const Curso: CollectionConfig = {
         {
             name: 'descripcion',
             type: 'richText',
-            required: true,
             editor: lexicalEditor({
                 features: ({ defaultFeatures }) => [
                     ...defaultFeatures,
                     FixedToolbarFeature(), // Agregar la barra fija
                 ],
             }),
+            required: true,
         },
         {
             name: 'logo',
             type: 'upload',
             relationTo: 'media',
+            filterOptions: {
+                mimeType: { contains: 'image' }
+            },
             required: true,
         },
         {

@@ -1,10 +1,12 @@
 import { getPayload } from 'payload'
-import { lexicalToHTML } from '@payloadcms/richtext-lexical'
 import { Media } from '@/payload-types'
 import config from '@/payload.config'
 import Image from 'next/image'
 
-export default async function CursoPage({ params }: { params: { id: string } }) {
+export default async function CursoPage({ params }: { params?: { id?: string } }) {
+  if (!params?.id) {
+    return <p>Curso no encontrado</p>
+  }
   const payload = await getPayload({ config })
   const curso = await payload.findByID({ collection: 'curso', id: params.id }) // Busca curso por ID
 
@@ -17,7 +19,13 @@ export default async function CursoPage({ params }: { params: { id: string } }) 
       <h1>{curso.nombre}</h1>
       <div>
         <strong>Descripción:</strong>
-        <div dangerouslySetInnerHTML={{ __html: lexicalToHTML(curso.descripcion) }} />
+        <div
+          dangerouslySetInnerHTML={{
+            __html: curso.descripcion.root.children
+              .map((child: any) => child.text || '')
+              .join('<br>'),
+          }}
+        />
       </div>
       <p>
         <strong>Estado:</strong> {curso.estado ? 'Activo' : 'Inactivo'}
@@ -44,7 +52,7 @@ export default async function CursoPage({ params }: { params: { id: string } }) 
         </div>
       )}
 
-      <a href="/cursos">
+      <a href={'/curso'}>
         <button
           style={{ marginTop: '20px', padding: '10px', backgroundColor: '#0070f3', color: 'white' }}
         >

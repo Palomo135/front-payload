@@ -1,0 +1,32 @@
+.prose {
+  color: #374151;
+  line-height: 1.6;
+}
+
+.prose p {
+  margin-bottom: 1rem;
+}
+
+.prose br {
+  display: block;
+  content: '';
+  margin-top: 0.5rem;
+}
+
+/* Asegúrate de que las imágenes de los cursos se muestren correctamente */
+.object-cover {
+  object-fit: cover;
+}
+
+/* Mejoras para la accesibilidad en los enlaces */
+a:focus {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+/* Transiciones suaves */
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
