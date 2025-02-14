@@ -1,32 +1,46 @@
-.prose {
-  color: #374151;
-  line-height: 1.6;
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
 }
 
-.prose p {
-  margin-bottom: 1rem;
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: white;
 }
 
-.prose br {
-  display: block;
-  content: '';
-  margin-top: 0.5rem;
+.cursos-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 15px;
 }
 
-/* Asegúrate de que las imágenes de los cursos se muestren correctamente */
-.object-cover {
-  object-fit: cover;
+.curso-item {
+  background: #222;
+  padding: 15px;
+  border-radius: 8px;
+  transition: transform 0.2s ease-in-out;
 }
 
-/* Mejoras para la accesibilidad en los enlaces */
-a:focus {
-  outline: 2px solid #2563eb;
-  outline-offset: 2px;
+.curso-item:hover {
+  transform: scale(1.05);
 }
 
-/* Transiciones suaves */
-.transition-all {
-  transition-property: all;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
+.curso-content h2 {
+  color: #fff;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.curso-content p {
+  color: #aaa;
+  margin: 5px 0;
+}
+
+.curso-content strong {
+  color: #ddd;
 }

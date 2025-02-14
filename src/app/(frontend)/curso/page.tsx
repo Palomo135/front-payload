@@ -11,8 +11,18 @@ export default async function HomePage() {
 
   // Obtener la lista de cursos
   const { docs: cursos } = await payload.find({
-    collection: 'curso', // Nombre de la colección en Payload CMS
+    collection: 'curso',
   })
+
+  // Función para extraer el texto de la descripción
+  const getDescriptionText = (descripcion: any) => {
+    if (!descripcion?.root?.children?.[0]?.children) {
+      return 'Sin descripción'
+    }
+
+    // Extraer el texto de todos los children
+    return descripcion.root.children[0].children.map((child: any) => child.text || '').join('')
+  }
 
   return (
     <div className="container">
@@ -21,9 +31,9 @@ export default async function HomePage() {
         {cursos.map((curso) => (
           <li key={curso.id} className="curso-item">
             <Link href={`/curso/${curso.id}`}>
-              <div>
+              <div className="curso-content">
                 <h2>{curso.nombre}</h2>
-                <p>{curso.descripcion.root.children[0].type || 'Sin descripcion'}</p>
+                <p>{getDescriptionText(curso.descripcion)}</p>
                 <p>
                   <strong>Estado:</strong> {curso.estado ? 'Activo' : 'Inactivo'}
                 </p>
