@@ -2,7 +2,7 @@
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
-  text-align: center;
+  text-align: left;
 }
 
 .title {
@@ -20,7 +20,7 @@
 }
 
 .curso-item {
-  background: #222;
+  background: #222222bd;
   padding: 15px;
   border-radius: 8px;
   transition: transform 0.2s ease-in-out;
@@ -43,4 +43,9 @@
 
 .curso-content strong {
   color: #ddd;
+}
+
+.curso-item a {
+  text-decoration: none;
+  color: inherit;
 }

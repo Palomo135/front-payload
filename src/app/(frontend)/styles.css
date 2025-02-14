@@ -10,7 +10,7 @@ html {
   font-size: 18px;
   line-height: 32px;
 
-  background: rgb(0, 0, 0);
+  background: rgb(68, 115, 175);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -142,7 +142,7 @@ svg {
     .curso {
       margin-top: 1px;
       padding: 7px 15px;
-      background-color: #0070f3;
+      background-color: #00f8bab7;
       color: white;
       border: none;
       border-radius: 5px;

@@ -33,6 +33,28 @@ export default async function CursoPage({ params }: { params: Promise<{ id: stri
     })
   }
 
+  const calcularDuracion = (inicio: string | null | undefined, fin: string | null | undefined) => {
+    if (!inicio || !fin) return 'No especificada'
+
+    const fechaInicio = new Date(inicio)
+    const fechaFin = new Date(fin)
+
+    if (isNaN(fechaInicio.getTime()) || isNaN(fechaFin.getTime())) {
+      return 'Fechas inválidas'
+    }
+
+    const diferenciaMs = fechaFin.getTime() - fechaInicio.getTime()
+    const dias = Math.floor(diferenciaMs / (1000 * 60 * 60 * 24))
+
+    if (dias < 7) {
+      return `${dias} día${dias !== 1 ? 's' : ''}`
+    } else if (dias < 30) {
+      return `${Math.floor(dias / 7)} semana${dias >= 14 ? 's' : ''}`
+    } else {
+      return `${Math.floor(dias / 30)} mes${dias >= 60 ? 'es' : ''}`
+    }
+  }
+
   return (
     <div>
       <h1>{curso.nombre}</h1>
@@ -42,6 +64,9 @@ export default async function CursoPage({ params }: { params: Promise<{ id: stri
       </div>
       <p>
         <strong>Estado:</strong> {curso.estado ? 'Activo' : 'Inactivo'}
+      </p>
+      <p>
+        <strong>Duración:</strong> {calcularDuracion(curso.fechaInicio, curso.fechaCaducidad)}
       </p>
       <p>
         <strong>Fecha de Inicio:</strong> {formatDate(curso.fechaInicio)}
