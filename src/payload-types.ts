@@ -88,7 +88,7 @@ export interface Config {
   };
   globals: {};
   globalsSelect: {};
-  locale: null;
+  locale: 'en' | 'es';
   user: User & {
     collection: 'users';
   };
@@ -158,6 +158,7 @@ export interface Media {
 export interface Curso {
   id: number;
   nombre: string;
+  resumen: string;
   descripcion: {
     root: {
       type: string;
@@ -297,6 +298,7 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface CursoSelect<T extends boolean = true> {
   nombre?: T;
+  resumen?: T;
   descripcion?: T;
   logo?: T;
   fechaInicio?: T;

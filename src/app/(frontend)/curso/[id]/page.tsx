@@ -26,6 +26,7 @@ async function getModulosPorCurso(cursoId: string) {
 export default async function CursoPage({ params }: { params: Promise<{ id: string }> }) {
   const curso = await getCurso((await params).id)
   const modulos = await getModulosPorCurso((await params).id)
+  console.log(curso)
 
   if (!curso) {
     return <p>Curso no encontrado</p>

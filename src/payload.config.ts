@@ -22,6 +22,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
+  localization: { locales: ['en', 'es'], defaultLocale: 'es' },
   collections: [Users, Media, Curso, Modulo],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
@@ -39,4 +40,5 @@ export default buildConfig({
     payloadCloudPlugin(),
     // storage-adapter-placeholder
   ],
+  cors: '*',
 })
