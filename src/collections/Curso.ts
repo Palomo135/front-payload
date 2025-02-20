@@ -1,5 +1,10 @@
 import type { CollectionConfig } from 'payload'
-import { lexicalEditor, FixedToolbarFeature } from '@payloadcms/richtext-lexical'
+import {
+  lexicalEditor,
+  FixedToolbarFeature,
+  lexicalHTML,
+  HTMLConverterFeature,
+} from '@payloadcms/richtext-lexical'
 
 export const Curso: CollectionConfig = {
   slug: 'curso',
@@ -27,10 +32,12 @@ export const Curso: CollectionConfig = {
         features: ({ defaultFeatures }) => [
           ...defaultFeatures,
           FixedToolbarFeature(), // Agregar la barra fija
+          HTMLConverterFeature({}),
         ],
       }),
       required: true,
     },
+    lexicalHTML('descripcion', { name: 'descripcionHTML' }),
     {
       name: 'logo',
       type: 'upload',
@@ -71,4 +78,23 @@ export const Curso: CollectionConfig = {
     //     hasMany: true,
     // },
   ],
+  // hooks: {
+  //   beforeChange: [
+  //     async ({ data }) => {
+  //       if (data.descripcion) {
+  //         try {
+  //           const html = await convertLexicalToHTML({
+  //             data: data.descripcion,
+  //             converters: [...defaultHTMLConverters, headingConverter],
+  //           })
+
+  //           data.descripcionHTML = html
+  //         } catch (error) {
+  //           console.error('Error al convertir Lexical a HTML:', error)
+  //         }
+  //       }
+  //       return data
+  //     },
+  //   ],
+  // },
 }

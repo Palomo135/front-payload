@@ -174,6 +174,7 @@ export interface Curso {
     };
     [k: string]: unknown;
   };
+  descripcionHTML?: string | null;
   logo: number | Media;
   fechaInicio?: string | null;
   fechaCaducidad?: string | null;
@@ -300,6 +301,7 @@ export interface CursoSelect<T extends boolean = true> {
   nombre?: T;
   resumen?: T;
   descripcion?: T;
+  descripcionHTML?: T;
   logo?: T;
   fechaInicio?: T;
   fechaCaducidad?: T;
